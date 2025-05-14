@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us - CVisionary</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      }
+
+      :root {
+        --primary: #a1c9ff;
+        --primary-dark: #4997ff;
+        --primary-light: #818cf8;
+        --secondary: #cca6ff;
+        --gray-50: #f9fafb;
+        --gray-100: #f3f4f6;
+        --gray-200: #e5e7eb;
+        --gray-300: #d1d5db;
+        --gray-400: #9ca3af;
+        --gray-500: #6b7280;
+        --gray-600: #4b5563;
+        --gray-700: #374151;
+        --gray-800: #1f2937;
+        --gray-900: #111827;
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      body {
+        background-color: var(--gray-50);
+        color: var(--gray-900);
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 0 40px;
+      }
+
+      header {
+        background-color: white;
+        box-shadow: var(--shadow-sm);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 0 40px;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+        max-width: 1440px;
+        margin: 0 auto;
+        height: 80px;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+      }
+
+      .logo span {
+        color: var(--gray-900);
+      }
+
+      .logo-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-light)
+        );
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 20px;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 40px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--gray-600);
+        font-weight: 500;
+        transition: all 0.3s ease;
+        font-size: 1.05rem;
+        position: relative;
+        padding: 6px 2px;
+      }
+
+      .nav-links a:hover {
+        color: var(--primary);
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 3px;
+        bottom: -3px;
+        left: 0;
+        background-color: var(--primary);
+        transition: width 0.3s ease;
+        border-radius: 2px;
+      }
+      
+      .nav-links a.active {
+        color: var(--primary);
+      }
+
+      .nav-links a.active::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 3px;
+        bottom: -3px;
+        left: 0;
+        background-color: var(--primary);
+        border-radius: 2px;
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .auth-buttons {
+        display: flex;
+        gap: 20px;
+      }
+
+      .btn {
+        padding: 12px 24px;
+        border-radius: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: none;
+        font-size: 1rem;
+      }
+
+      .btn-outline {
+        background-color: transparent;
+        border: 2px solid var(--primary);
+        color: var(--primary);
+      }
+
+      .btn-outline:hover {
+        background-color: var(--primary);
+        color: white;
+      }
+
+      .btn-primary {
+        background-color: var(--primary);
+        color: white;
+        box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
+      }
+
+      .btn-primary:hover {
+        background-color: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+      }
+
+      /* Hero section */
+      .hero-section {
+        padding-top: 160px;
+        padding-bottom: 100px;
+        position: relative;
+        overflow: hidden;
+        background-color: var(--gray-50);
+      }
+
+      .hero-section::before {
+        content: "";
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        background: linear-gradient(
+          135deg,
+          rgba(79, 70, 229, 0.1),
+          rgba(129, 140, 248, 0.1)
+        );
+        border-radius: 50%;
+        top: -200px;
+        right: -200px;
+        z-index: 0;
+      }
+
+      .hero-content {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-subtitle {
+        color: var(--secondary);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 20px;
+        display: inline-block;
+        padding: 8px 16px;
+        border-radius: 30px;
+        background-color: rgba(204, 166, 255, 0.1);
+      }
+
+      .hero-title {
+        font-size: 4rem;
+        font-weight: 800;
+        line-height: 1.2;
+        margin-bottom: 30px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero-description {
+        color: var(--gray-600);
+        font-size: 1.2rem;
+        line-height: 1.7;
+        margin-bottom: 40px;
+      }
+
+      /* About section */
+      .section {
+        padding: 100px 0;
+      }
+
+      .section-light {
+        background-color: white;
+      }
+
+      .section-dark {
+        background-color: var(--gray-900);
+        color: white;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .section-subtitle {
+        color: var(--gray-600);
+        font-size: 1.2rem;
+        text-align: center;
+        max-width: 700px;
+        margin: 0 auto 60px;
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+      }
+
+      .about-image {
+        position: relative;
+        height: 100%;
+      }
+
+      .about-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 20px;
+        box-shadow: var(--shadow-lg);
+      }
+
+      .image-overlay {
+        position: absolute;
+        bottom: -30px;
+        right: -30px;
+        width: 200px;
+        height: 200px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        border-radius: 20px;
+        opacity: 0.1;
+        z-index: -1;
+      }
+
+      .about-content h3 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 30px;
+        color: var(--gray-800);
+      }
+
+      .about-content p {
+        color: var(--gray-600);
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 20px;
+      }
+
+      .stats-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin-top: 50px;
+      }
+
+      .stat-item {
+        text-align: center;
+        background-color: white;
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: var(--shadow);
+        transition: all 0.3s ease;
+      }
+
+      .stat-item:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-md);
+      }
+
+      .stat-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        color: white;
+        font-size: 24px;
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .stat-label {
+        color: var(--gray-600);
+        font-size: 1.1rem;
+        font-weight: 500;
+      }
+
+      /* Mission section */
+      .mission-section {
+        background-color: var(--gray-100);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .mission-section::after {
+        content: "";
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        background: linear-gradient(
+          135deg,
+          rgba(204, 166, 255, 0.1),
+          rgba(79, 70, 229, 0.1)
+        );
+        border-radius: 50%;
+        bottom: -200px;
+        left: -100px;
+        z-index: 0;
+      }
+
+      .mission-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 60px;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      .mission-content {
+        background-color: white;
+        border-radius: 24px;
+        padding: 60px;
+        box-shadow: var(--shadow-lg);
+      }
+
+      .mission-title {
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 30px;
+      }
+
+      .mission-description {
+        color: var(--gray-600);
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 30px;
+      }
+
+      .mission-values {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+      }
+
+      .value-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+      }
+
+      .value-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background-color: rgba(79, 70, 229, 0.1);
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+      }
+
+      .value-content h4 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 5px;
+        color: var(--gray-800);
+      }
+
+      .value-content p {
+        color: var(--gray-600);
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+
+      .vision-image {
+        position: relative;
+      }
+
+      .vision-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 20px;
+        box-shadow: var(--shadow-lg);
+      }
+
+      .vision-overlay {
+        position: absolute;
+        top: -30px;
+        left: -30px;
+        width: 180px;
+        height: 180px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        border-radius: 20px;
+        opacity: 0.1;
+        z-index: -1;
+      }
+
+      /* Team section */
+      .team-section {
+        padding: 100px 0;
+        background-color: white;
+      }
+
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin-top: 60px;
+      }
+
+      .team-member {
+        background-color: var(--gray-50);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: all 0.3s ease;
+      }
+
+      .team-member:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .team-photo {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+      }
+
+      .team-info {
+        padding: 30px;
+        text-align: center;
+      }
+
+      .team-name {
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: var(--gray-800);
+      }
+
+      .team-position {
+        color: var(--primary);
+        font-weight: 600;
+        margin-bottom: 15px;
+      }
+
+      .team-bio {
+        color: var(--gray-600);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+
+      .team-social {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .team-social a {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: var(--gray-200);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gray-600);
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+      }
+
+      .team-social a:hover {
+        background-color: var(--primary);
+        color: white;
+      }
+
+      /* Timeline section */
+      .timeline-section {
+        padding: 100px 0;
+        background-color: var(--gray-50);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .timeline-section::before {
+        content: "";
+        position: absolute;
+        width: 400px;
+        height: 400px;
+        background: linear-gradient(
+          135deg,
+          rgba(79, 70, 229, 0.1),
+          rgba(129, 140, 248, 0.1)
+        );
+        border-radius: 50%;
+        top: -100px;
+        right: -100px;
+        z-index: 0;
+      }
+
+      .timeline {
+        position: relative;
+        max-width: 1000px;
+        margin: 60px auto 0;
+        padding: 20px 0;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        width: 4px;
+        background-color: var(--gray-300);
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -2px;
+        border-radius: 2px;
+      }
+
+      .timeline-item {
+        position: relative;
+        width: 50%;
+        padding: 20px 40px;
+        box-sizing: border-box;
+        margin-bottom: 50px;
+      }
+
+      .timeline-item:nth-child(odd) {
+        left: 0;
+        text-align: right;
+      }
+
+      .timeline-item:nth-child(even) {
+        left: 50%;
+      }
+
+      .timeline-icon {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: var(--primary);
+        top: 20px;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        z-index: 1;
+        box-shadow: 0 0 0 5px var(--gray-50);
+      }
+
+      .timeline-item:nth-child(odd) .timeline-icon {
+        right: -60px;
+      }
+
+      .timeline-item:nth-child(even) .timeline-icon {
+        left: -60px;
+      }
+
+      .timeline-content {
+        padding: 30px;
+        background-color: white;
+        border-radius: 16px;
+        box-shadow: var(--shadow);
+        position: relative;
+      }
+
+      .timeline-date {
+        font-size: 0.95rem;
+        color: var(--primary);
+        font-weight: 600;
+        margin-bottom: 15px;
+        display: inline-block;
+        padding: 5px 15px;
+        background-color: rgba(79, 70, 229, 0.1);
+        border-radius: 30px;
+      }
+
+      .timeline-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        color: var(--gray-800);
+      }
+
+      .timeline-description {
+        color: var(--gray-600);
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      /* Testimonials section */
+      .testimonials-section {
+        padding: 100px 0;
+        background-color: white;
+        position: relative;
+      }
+
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin-top: 60px;
+      }
+
+      .testimonial-card {
+        background-color: var(--gray-50);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: var(--shadow);
+        transition: all 0.3s ease;
+      }
+
+      .testimonial-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-md);
+      }
+
+      .testimonial-content {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: var(--gray-600);
+        margin-bottom: 30px;
+        position: relative;
+      }
+
+      .testimonial-content::before {
+        content: "";
+        font-size: 4rem;
+        font-family: Georgia, serif;
+        color: var(--primary);
+        opacity: 0.2;
+        position: absolute;
+        top: -20px;
+        left: -15px;
+      }
+
+      .testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .author-image {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .author-info h4 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 5px;
+        color: var(--gray-800);
+      }
+
+      .author-info p {
+        color: var(--primary);
+        font-size: 0.9rem;
+      }
+
+      /* CTA section */
+      .cta-section {
+        padding: 100px 0;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        text-align: center;
+        color: white;
+      }
+
+      .cta-container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .cta-title {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 30px;
+      }
+
+      .cta-description {
+        font-size: 1.2rem;
+        line-height: 1.7;
+        margin-bottom: 40px;
+        opacity: 0.9;
+      }
+
+      .cta-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .btn-white {
+        background-color: white;
+        color: var(--primary);
+      }
+
+      .btn-white:hover {
+        background-color: var(--gray-100);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn-outline-white {
+        background-color: transparent;
+        border: 2px solid white;
+        color: white;
+      }
+
+      .btn-outline-white:hover {
+        background-color: white;
+        color: var(--primary);
+      }
+
+      /* Footer styles */
+      footer {
+        background-color: var(--gray-900);
+        color: var(--gray-400);
+        padding: 100px 0 40px;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 60px;
+        margin-bottom: 60px;
+      }
+
+      .footer-logo {
+        color: white;
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .footer-logo-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-light)
+        );
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 20px;
+      }
+
+      .footer-description {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-bottom: 30px;
+        opacity: 0.7;
+      }
+
+      .social-icons {
+        display: flex;
+        gap: 16px;
+      }
+
+      .social-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        font-size: 1.2rem;
+        color: white;
+        text-decoration: none;
+      }
+
+      .social-icon:hover {
+        background-color: var(--primary);
+        transform: translateY(-3px);
+      }
+
+      .footer-heading {
+        color: white;
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 30px;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .footer-links a {
+        color: var(--gray-400);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-size: 1.05rem;
+      }
+
+      .footer-links a:hover {
+        color: white;
+        transform: translateX(5px);
+      }
+
+      .footer-bottom {
+        padding-top: 40px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .footer-bottom-links {
+        display: flex;
+        gap: 30px;
+      }
+
+      .footer-bottom-links a {
+        color: var(--gray-500);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-size: 0.95rem;
+      }
+
+      .footer-bottom-links a:hover {
+        color: white;
+      }
+
+      /* Responsive styles */
+      @media (max-width: 1200px) {
+        .about-grid,
+        .mission-container {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+
+        .team-grid,
+        .testimonials-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 992px) {
+        .container {
+          padding: 0 20px;
+        }
+
+        .hero-title {
+          font-size: 3rem;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+
+        .stats-container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .timeline::before {
+          left: 40px;
+        }
+
+        .timeline-item {
+          width: 100%;
+          padding-left: 80px;
+          padding-right: 20px;
+        }
+
+        .timeline-item:nth-child(odd) {
+          left: 0;
+          text-align: left;
+        }
+
+        .timeline-item:nth-child(even) {
+          left: 0;
+        }
+
+        .timeline-icon {
+          left: 20px !important;
+          right: auto !important;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .team-grid,
+        .testimonials-grid,
+        .stats-container {
+          grid-template-columns: 1fr;
+        }
+
+        .mission-values {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-title {
+          font-size: 2.5rem;
+        }
+
+        .cta-title {
+          font-size: 2rem;
+        }
+
+        .cta-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .footer-grid {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+
+        .footer-bottom {
+          flex-direction: column;
+          gap: 20px;
+          text-align: center;
+        }
+
+        .footer-bottom-links {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="index.html" class="logo">
+          <div class="logo-icon">
+            <i class="fas fa-brain"></i>
+          </div>
+          CVisionary
+        </a>
+        <div class="nav-links">
+          <a href="features.html">Features</a>
+          <a href="howitworks.html">How It Works</a>
+          <a href="#">Pricing</a>
+          <a href="upload.html">Upload</a>
+          <a href="about-us.html" class="active">About Us</a>
+        </div>
+        <div class="auth-buttons">
+          <button class="btn btn-outline">Log In</button>
+          <button class="btn btn-primary">Get Started</button>
+        </div>
+      </nav>
+    </header>
+
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-content">
+          <span class="hero-subtitle">OUR STORY</span>
+          <h1 class="hero-title">Revolutionizing Recruitment with AI</h1>
+          <p class="hero-description">
+            At CVisionary, we're on a mission to transform how job seekers and employers connect by leveraging the power of artificial intelligence to create perfect matches.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-light">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-image">
+            <img src="/api/placeholder/600/400" alt="About CVisionary" />
+            <div class="image-overlay"></div>
+          </div>
+          <div class="about-content">
+            <h3>Who We Are</h3>
+            <p>
+              CVisionary was founded in 2020 by a team of HR professionals and AI engineers who recognized the inefficiencies in traditional recruitment processes. We saw firsthand how both candidates and employers struggled to find their perfect match, despite the wealth of talent and opportunities available.
+            </p>
+            <p>
+              Our platform uses cutting-edge AI and machine learning algorithms to analyze resumes, job descriptions, and company cultures to create meaningful connections between job seekers and employers. By focusing on skills, experience, and cultural fit, we help companies build diverse and talented teams while helping individuals find careers where they can truly thrive.
+            </p>
+            <p>
+              Today, CVisionary serves thousands of companies and job seekers worldwide, with offices in San Francisco, New York, London, and Singapore. Our diverse team of over 120 professionals is united by a common purpose: to make recruitment more efficient, equitable, and human-centered.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Key Facts About Us</h2>
+        <p class="section-subtitle">
+          CVisionary has grown from a small startup to a global leader in AI-powered recruitment solutions.
+        </p>
+        <div class="stats-container">
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="stat-number">2.5M+</div>
+            <div class="stat-label">Job Seekers Placed</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="fas fa-building"></i>
+            </div>
+            <div class="stat-number">12K+</div>
+            <div class="stat-label">Partner Companies</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="fas fa-globe"></i>
+            </div>
+            <div class="stat-number">35+</div>
+            <div class="stat-label">Countries Served</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section mission-section">
+      <div class="container">
+        <div class="mission-container">
+          <div class="mission-content">
+            <h3 class="mission-title">Our Mission & Values</h3>
+            <p class="mission-description">
+              Our mission is to create a world where every person can find fulfilling work and every company can build exceptional teams. We believe in using technology to enhance human potential, not replace it.
+            </p>
+            <div class="mission-values">
+              <div class="value-item">
+                <div class="value-icon">
+                  <i class="fas fa-handshake"></i>
+                </div>
+                <div class="value-content">
+                  <h4>Integrity</h4>
+                  <p>We operate with honesty and transparency in all our interactions with clients, candidates, and team members.</p>
+                </div>
+              </div>
+              <div class="value-item">
+                <div class="value-icon">
+                  <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="value-content">
+                  <h4>Innovation</h4>
+                  <p>We continuously push the boundaries of what's possible with AI to solve real-world recruitment challenges.</p>
+                </div>
+              </div>
+              <div class="value-item">
+                <div class="value-icon">
+                  <i class="fas fa-balance-scale"></i>
+                </div>
+                <div class="value-content">
+                  <h4>Diversity & Inclusion</h4>
+                  <p>We believe diverse teams are stronger teams, and our technology is designed to reduce bias in hiring.</p>
+                </div>
+              </div>
+              <div class="value-item">
+                <div class="value-icon">
+                  <i class="fas fa-heart"></i>
+                </div>
+                <div class="value-content">
+                  <h4>Empathy</h4>
+                  <p>We understand the human side of hiring and design our solutions with both employers and job seekers in mind.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="vision-image">
+            <img src="/api/placeholder/600/400" alt="Our Vision" />
+            <div class="vision-overlay"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section team-section">
+      <div class="container">
+        <h2 class="section-title">Meet Our Leadership Team</h2>
+        <p class="section-subtitle">
+          Our diverse team brings together expertise in AI, machine learning, HR, and business to create innovative recruitment solutions.
+        </p>
+        <div class="team-grid">
+          <div class="team-member">
+            <img src="/api/placeholder/400/300" alt="Sarah Johnson" class="team-photo" />
+            <div class="team-info">
+              <h3 class="team-name">Sarah Johnson</h3>
+              <p class="team-position">Co-Founder & CEO</p>
+              <p class="team-bio">
+                Former HR Director with 15+ years of experience in talent acquisition. Sarah leads our vision and strategy, ensuring we remain focused on solving real recruitment challenges.
+              </p>
+              <div class="team-social">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="team-member">
+            <img src="/api/placeholder/400/300" alt="David Chen" class="team-photo" />
+            <div class="team-info">
+              <h3 class="team-name">David Chen</h3>
+              <p class="team-position">Co-Founder & CTO</p>
+              <p class="team-bio">
+                AI researcher and engineer with a Ph.D. from MIT. David leads our technology development, pushing the boundaries of what's possible with AI in recruitment.
+              </p>
+              <div class="team-social">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="team-member">
+            <img src="/api/placeholder/400/300" alt="Priya Patel" class="team-photo" />
+            <div class="team-info">
+              <h3 class="team-name">Priya Patel</h3>
+              <p class="team-position">Chief Operating Officer</p>
+              <p class="team-bio">
+                Former management consultant with experience scaling startups. Priya oversees our global operations and ensures we deliver exceptional service to clients.
+              </p>
+              <div class="team-social">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section timeline-section">
+      <div class="container">
+        <h2 class="section-title">Our Journey</h2>
+        <p class="section-subtitle">
+          From concept to global leader, see how CVisionary has evolved over the years.
+        </p>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-icon">
+              <i class="fas fa-rocket"></i>
+            </div>
+            <div class="timeline-content">
+              <span class="timeline-date">March 2020</span>
+              <h3 class="timeline-title">CVisionary Founded</h3>
+              <p class="timeline-description">
+                Sarah Johnson and David Chen founded CVisionary with a mission to transform recruitment using AI.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-icon">
+              <i class="fas fa-code"></i>
+            </div>
+            <div class="timeline-content">
+              <span class="timeline-date">November 2020</span>
+              <h3 class="timeline-title">First Product Launch</h3>
+              <p class="timeline-description">
+                Launched our beta platform with 50 partner companies, achieving a 92% satisfaction rate.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="timeline-content">
+              <span class="timeline-date">June 2021</span>
+              <h3 class="timeline-title">Series A Funding</h3>
+              <p class="timeline-description">
+                Secured $15M in Series A funding to expand our team and enhance our AI capabilities.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-icon">
+              <i class="fas fa-globe-americas"></i>
+            </div>
+            <div class="timeline-content">
+              <span class="timeline-date">January 2022</span>
+              <h3 class="timeline-title">Global Expansion</h3>
+              <p class="timeline-description">
+                Opened offices in London and Singapore, expanding our services to Europe and Asia.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-icon">
+              <i class="fas fa-trophy"></i>
+            </div>
+            <div class="timeline-content">
+              <span class="timeline-date">November 2023</span>
+              <h3 class="timeline-title">Industry Recognition</h3>
+              <p class="timeline-description">
+                Named "HR Tech Company of the Year" and reached the milestone of 1 million successful placements.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-icon">
+              <i class="fas fa-star"></i>
+            </div>
+            <div class="timeline-content">
+              <span class="timeline-date">April 2024</span>
+              <h3 class="timeline-title">Present Day</h3>
+              <p class="timeline-description">
+                Serving 12,000+ companies across 35 countries with a team of 120+ professionals dedicated to transforming recruitment.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section testimonials-section">
+      <div class="container">
+        <h2 class="section-title">What People Say About Us</h2>
+        <p class="section-subtitle">
+          Hear from the companies and job seekers who have experienced the CVisionary difference.
+        </p>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <p class="testimonial-content">
+              CVisionary transformed our hiring process. We've reduced time-to-hire by 47% and improved retention rates by identifying candidates who truly align with our culture and values.
+            </p>
+            <div class="testimonial-author">
+              <img src="/api/placeholder/100/100" alt="Michael Roberts" class="author-image" />
+              <div class="author-info">
+                <h4>Michael Roberts</h4>
+                <p>HR Director, Global Tech Solutions</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-content">
+              As someone who struggled to get interviews despite having the right skills, CVisionary was a game-changer. Their AI matched me with a company that recognized my potential, and I've been thriving there for over a year now.
+            </p>
+            <div class="testimonial-author">
+              <img src="/api/placeholder/100/100" alt="Elena Kim" class="author-image" />
+              <div class="author-info">
+                <h4>Elena Kim</h4>
+                <p>Software Developer</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-content">
+              The insights we get from CVisionary's analytics have completely changed how we approach recruitment. We're building more diverse teams and seeing incredible results in innovation and collaboration.
+            </p>
+            <div class="testimonial-author">
+              <img src="/api/placeholder/100/100" alt="James Williams" class="author-image" />
+              <div class="author-info">
+                <h4>James Williams</h4>
+                <p>CEO, Innovative Startups Inc.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-container">
+          <h2 class="cta-title">Ready to Transform Your Recruitment Process?</h2>
+          <p class="cta-description">
+            Join thousands of companies and millions of job seekers who are finding their perfect match with CVisionary's AI-powered platform.
+          </p>
+          <div class="cta-buttons">
+            <button class="btn btn-white">Request a Demo</button>
+            <button class="btn btn-outline-white">Learn More</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="footer-logo">
+              <div class="footer-logo-icon">
+                <i class="fas fa-brain"></i>
+              </div>
+              CVisionary
+            </div>
+            <p class="footer-description">
+              Transforming recruitment through the power of artificial intelligence. Connecting the right talent with the right opportunities.
+            </p>
+            <div class="social-icons">
+              <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+              <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+              <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+          <div>
+            <h4 class="footer-heading">Company</h4>
+            <div class="footer-links">
+              <a href="about.html">About Us</a>
+              <a href="#">Careers</a>
+              <a href="#">Blog</a>
+              <a href="#">Press</a>
+              <a href="#">Contact</a>
+            </div>
+          </div>
+          <div>
+            <h4 class="footer-heading">Product</h4>
+            <div class="footer-links">
+              <a href="features.html">Features</a>
+              <a href="howitworks.html">How It Works</a>
+              <a href="#">Pricing</a>
+              <a href="#">Case Studies</a>
+              <a href="#">Testimonials</a>
+            </div>
+          </div>
+          <div>
+            <h4 class="footer-heading">Resources</h4>
+            <div class="footer-links">
+              <a href="#">Help Center</a>
+              <a href="#">Documentation</a>
+              <a href="#">API Reference</a>
+              <a href="#">Privacy Policy</a>
+              <a href="#">Terms of Service</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2025 CVisionary. All rights reserved.</p>
+          <div class="footer-bottom-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookie Policy</a>
+            <a href="#">Sitemap</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script>
+      // Add any JavaScript functionality here
+      document.addEventListener("DOMContentLoaded", function () {
+        // Add scroll animation for header
+        window.addEventListener("scroll", function () {
+          const header = document.querySelector("header");
+          if (window.scrollY > 10) {
+            header.style.boxShadow = "var(--shadow)";
+            header.style.background = "rgba(255, 255, 255, 0.98)";
+          } else {
+            header.style.boxShadow = "var(--shadow-sm)";
+            header.style.background = "white";
+          }
+        });
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // Get the buttons from the main page
+        const loginButton = document.querySelector(
+          ".auth-buttons .btn-outline"
+        );
+        const getStartedButton = document.querySelector(
+          ".auth-buttons .btn-primary"
+        );
+
+        if (loginButton) {
+          loginButton.addEventListener("click", function () {
+            // Navigate to login/signup page with login tab active (default)
+            window.location.href = "login-signup.html";
+          });
+        }
+
+        if (getStartedButton) {
+          getStartedButton.addEventListener("click", function () {
+            // Navigate to login/signup page with signup tab active
+            window.location.href = "login-signup.html?tab=signup";
+          });
+        }
+
+        // On the login/signup page, check if we should show signup tab
+        const urlParams = new URLSearchParams(window.location.search);
+        const activeTab = urlParams.get("tab");
+
+        if (activeTab === "signup") {
+          // If URL has ?tab=signup, activate the signup tab
+          const loginTab = document.getElementById("login-tab");
+          const signupTab = document.getElementById("signup-tab");
+
+          if (loginTab && signupTab) {
+            loginTab.classList.remove("active");
+            signupTab.classList.add("active");
+
+            // Also switch the visible form content if needed
+            const loginForm = document.querySelector(".login-form-content");
+            const signupForm = document.querySelector(".signup-form-content");
+
+            if (loginForm && signupForm) {
+              loginForm.style.display = "none";
+              signupForm.style.display = "block";
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
