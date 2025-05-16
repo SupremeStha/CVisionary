@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How It Works - CVisionary</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      }
+
+      :root {
+        --primary: #a1c9ff;
+        --primary-dark: #4997ff;
+        --primary-light: #818cf8;
+        --secondary: #cca6ff;
+        --gray-50: #f9fafb;
+        --gray-100: #f3f4f6;
+        --gray-200: #e5e7eb;
+        --gray-300: #d1d5db;
+        --gray-400: #9ca3af;
+        --gray-500: #6b7280;
+        --gray-600: #4b5563;
+        --gray-700: #374151;
+        --gray-800: #1f2937;
+        --gray-900: #111827;
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      body {
+        background-color: var(--gray-50);
+        color: var(--gray-900);
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 0 40px;
+      }
+
+      header {
+        background-color: white;
+        box-shadow: var(--shadow-sm);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 0 40px;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+        max-width: 1440px;
+        margin: 0 auto;
+        height: 80px;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+      }
+
+      .logo span {
+        color: var(--gray-900);
+      }
+
+      .logo-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-light)
+        );
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 20px;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 40px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--gray-600);
+        font-weight: 500;
+        transition: all 0.3s ease;
+        font-size: 1.05rem;
+        position: relative;
+        padding: 6px 2px;
+      }
+
+      .nav-links a:hover, .nav-links a.active {
+        color: var(--primary);
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 3px;
+        bottom: -3px;
+        left: 0;
+        background-color: var(--primary);
+        transition: width 0.3s ease;
+        border-radius: 2px;
+      }
+
+      .nav-links a:hover::after, .nav-links a.active::after {
+        width: 100%;
+      }
+
+      .auth-buttons {
+        display: flex;
+        gap: 20px;
+      }
+
+      .btn {
+        padding: 12px 24px;
+        border-radius: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: none;
+        font-size: 1rem;
+      }
+
+      .btn-outline {
+        background-color: transparent;
+        border: 2px solid var(--primary);
+        color: var(--primary);
+      }
+
+      .btn-outline:hover {
+        background-color: var(--primary);
+        color: white;
+      }
+
+      .btn-primary {
+        background-color: var(--primary);
+        color: white;
+        box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
+      }
+
+      .btn-primary:hover {
+        background-color: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+      }
+
+      /* Page Header */
+      .page-header {
+        padding: 200px 0 100px;
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: white;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .page-header::before,
+      .page-header::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        z-index: 0;
+      }
+
+      .page-header::before {
+        width: 400px;
+        height: 400px;
+        top: -200px;
+        right: -100px;
+      }
+
+      .page-header::after {
+        width: 300px;
+        height: 300px;
+        bottom: -150px;
+        left: -100px;
+      }
+
+      .page-header-content {
+        position: relative;
+        z-index: 1;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .page-subtitle {
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+        font-weight: 600;
+        opacity: 0.8;
+      }
+
+      .page-title {
+        font-size: 4rem;
+        font-weight: 800;
+        margin-bottom: 30px;
+      }
+
+      .page-description {
+        font-size: 1.3rem;
+        margin: 0 auto;
+        max-width: 700px;
+        line-height: 1.7;
+        opacity: 0.9;
+      }
+
+      /* Process Section */
+      .process-section {
+        padding: 120px 0;
+        position: relative;
+      }
+
+      .process-section::before {
+        content: "";
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        background: linear-gradient(
+          135deg,
+          rgba(79, 70, 229, 0.03),
+          rgba(129, 140, 248, 0.03)
+        );
+        border-radius: 50%;
+        top: -300px;
+        right: -300px;
+        z-index: 0;
+      }
+
+      .section-title-wrapper {
+        text-align: center;
+        max-width: 700px;
+        margin: 0 auto 80px;
+      }
+
+      .section-tag {
+        display: inline-block;
+        background-color: rgba(79, 70, 229, 0.1);
+        color: var(--primary-dark);
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+      }
+
+      .section-title {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 24px;
+        color: var(--gray-900);
+      }
+
+      .section-description {
+        color: var(--gray-600);
+        font-size: 1.2rem;
+        line-height: 1.7;
+      }
+
+      .process-timeline {
+        margin-top: 100px;
+        position: relative;
+      }
+
+      .timeline-line {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 100%;
+        background-color: var(--gray-200);
+        z-index: 0;
+      }
+
+      .timeline-item {
+        display: flex;
+        margin-bottom: 120px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .timeline-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .timeline-item:nth-child(odd) {
+        flex-direction: row;
+      }
+
+      .timeline-item:nth-child(even) {
+        flex-direction: row-reverse;
+      }
+
+      .timeline-content {
+        width: 45%;
+        padding: 40px;
+        background-color: white;
+        border-radius: 24px;
+        box-shadow: var(--shadow);
+        transition: all 0.3s ease;
+      }
+
+      .timeline-content:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .timeline-number {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-light)
+        );
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1.5rem;
+        box-shadow: var(--shadow);
+        z-index: 2;
+      }
+
+      .timeline-icon {
+        font-size: 2.5rem;
+        color: var(--primary);
+        margin-bottom: 25px;
+      }
+
+      .timeline-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 16px;
+        color: var(--gray-900);
+      }
+
+      .timeline-description {
+        color: var(--gray-600);
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-bottom: 20px;
+      }
+
+      .timeline-features {
+        margin-top: 20px;
+      }
+
+      .timeline-feature {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+
+      .timeline-feature-icon {
+        color: var(--primary);
+      }
+
+      .timeline-image {
+        width: 45%;
+        height: 350px;
+        position: relative;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+      }
+
+      .timeline-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* Benefits Section */
+      .benefits-section {
+        padding: 120px 0;
+        background-color: white;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .benefits-section::before {
+        content: "";
+        position: absolute;
+        width: 800px;
+        height: 800px;
+        background: linear-gradient(
+          135deg,
+          rgba(79, 70, 229, 0.03),
+          rgba(129, 140, 248, 0.03)
+        );
+        border-radius: 50%;
+        bottom: -400px;
+        right: -400px;
+        z-index: 0;
+      }
+
+      .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .benefit-card {
+        background-color: var(--gray-50);
+        border-radius: 24px;
+        padding: 40px;
+        box-shadow: var(--shadow);
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .benefit-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .benefit-icon {
+        width: 70px;
+        height: 70px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 30px;
+        font-size: 1.8rem;
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-light)
+        );
+        color: white;
+      }
+
+      .benefit-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 16px;
+        color: var(--gray-900);
+      }
+
+      .benefit-description {
+        color: var(--gray-600);
+        font-size: 1.1rem;
+        line-height: 1.7;
+      }
+
+      /* FAQ Section */
+      .faq-section {
+        padding: 120px 0;
+        position: relative;
+      }
+
+      .faq-section::before {
+        content: "";
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        background: linear-gradient(
+          135deg,
+          rgba(16, 185, 129, 0.05),
+          rgba(59, 130, 246, 0.05)
+        );
+        border-radius: 50%;
+        top: -300px;
+        left: -300px;
+        z-index: 0;
+      }
+
+      .faq-list {
+        max-width: 900px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+      }
+
+      .faq-item {
+        background-color: white;
+        border-radius: 16px;
+        margin-bottom: 20px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .faq-question {
+        padding: 25px 30px;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 600;
+        font-size: 1.2rem;
+        color: var(--gray-800);
+        transition: all 0.3s ease;
+      }
+
+      .faq-question:hover {
+        color: var(--primary);
+      }
+
+      .faq-question.active {
+        color: var(--primary);
+        background-color: rgba(79, 70, 229, 0.05);
+      }
+
+      .faq-question i {
+        transition: all 0.3s ease;
+      }
+
+      .faq-question.active i {
+        transform: rotate(180deg);
+      }
+
+      .faq-answer {
+        padding: 0 30px;
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .faq-answer.show {
+        padding: 0 30px 25px;
+        max-height: 500px;
+      }
+
+      .faq-answer-content {
+        color: var(--gray-600);
+        font-size: 1.1rem;
+        line-height: 1.7;
+      }
+
+      /* CTA Section */
+      .cta {
+        padding: 120px 0;
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-dark)
+        );
+        color: white;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta::before,
+      .cta::after {
+        content: "";
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        z-index: 0;
+      }
+
+      .cta::before {
+        top: -150px;
+        left: -150px;
+      }
+
+      .cta::after {
+        bottom: -150px;
+        right: -150px;
+      }
+
+      .cta-content {
+        position: relative;
+        z-index: 1;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .cta-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 24px;
+      }
+
+      .cta-description {
+        font-size: 1.3rem;
+        margin-bottom: 40px;
+        opacity: 0.9;
+      }
+
+      .cta-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+      }
+
+      .btn-light {
+        background-color: white;
+        color: var(--primary);
+      }
+
+      .btn-light:hover {
+        background-color: rgba(255, 255, 255, 0.9);
+        transform: translateY(-2px);
+      }
+
+      .btn-outline-light {
+        background-color: transparent;
+        border: 2px solid white;
+        color: white;
+      }
+
+      .btn-outline-light:hover {
+        background-color: white;
+        color: var(--primary);
+        transform: translateY(-2px);
+      }
+
+      .cta-buttons .btn {
+        padding: 16px 32px;
+        font-weight: 600;
+        font-size: 1.1rem;
+      }
+
+      /* Footer */
+      footer {
+        background-color: var(--gray-900);
+        color: var(--gray-400);
+        padding: 100px 0 40px;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 60px;
+        margin-bottom: 60px;
+      }
+
+      .footer-logo {
+        color: white;
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .footer-logo-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-light)
+        );
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 20px;
+      }
+
+      .footer-description {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-bottom: 30px;
+        opacity: 0.7;
+      }
+
+      .social-icons {
+        display: flex;
+        gap: 16px;
+      }
+
+      .social-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        font-size: 1.2rem;
+        color: white;
+      }
+
+      .social-icon:hover {
+        background-color: var(--primary);
+        transform: translateY(-3px);
+      }
+
+      .footer-heading {
+        color: white;
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 30px;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .footer-links a {
+        color: var(--gray-400);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-size: 1.05rem;
+      }
+
+      .footer-links a:hover {
+        color: white;
+        transform: translateX(5px);
+      }
+
+      .footer-bottom {
+        padding-top: 40px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .footer-bottom-links {
+        display: flex;
+        gap: 30px;
+      }
+
+      .footer-bottom-links a {
+        color: var(--gray-500);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-size: 0.95rem;
+      }
+
+      .footer-bottom-links a:hover {
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="index.html" class="logo">
+          <div class="logo-icon">
+            <i class="fas fa-brain"></i>
+          </div>
+          CVisionary
+        </a>
+        <div class="nav-links">
+          <a href="features.html">Features</a>
+          <a href="how-it-works.html" class="active">How It Works</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="upload.html">Upload</a>
+          <a href="about-us.html">About Us</a>
+        </div>
+        <div class="auth-buttons">
+          <button class="btn btn-outline">Log In</button>
+          <button class="btn btn-primary">Get Started</button>
+        </div>
+      </nav>
+    </header>
+
+    <section class="page-header">
+      <div class="container">
+        <div class="page-header-content">
+          <p class="page-subtitle">Our process</p>
+          <h1 class="page-title">How CVisionary Works</h1>
+          <p class="page-description">
+            Our AI-powered platform transforms recruitment through intelligent matching, 
+            making it easier for job seekers and employers to find their perfect match.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="process-section">
+      <div class="container">
+        <div class="section-title-wrapper">
+          <span class="section-tag">THE PROCESS</span>
+          <h2 class="section-title">Our Simple Yet Powerful Approach</h2>
+          <p class="section-description">
+            CVisionary uses advanced AI algorithms to analyze resumes and job postings, 
+            creating meaningful connections between talent and opportunities.
+          </p>
+        </div>
+
+        <div class="process-timeline">
+          <div class="timeline-line"></div>
+          
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <div class="timeline-icon"><i class="fas fa-upload"></i></div>
+              <h3 class="timeline-title">Submit Your Information</h3>
+              <p class="timeline-description">
+                Job seekers upload their resume, while employers create detailed job postings. 
+                Our platform accepts various formats and makes it easy to input your information.
+              </p>
+              <div class="timeline-features">
+                <div class="timeline-feature">
+                  <div class="timeline-feature-icon"><i class="fas fa-check-circle"></i></div>
+                  <div>Multiple file format support (PDF, DOCX, TXT)</div>
+                </div>
+                <div class="timeline-feature">
+                  <div class="timeline-feature-icon"><i class="fas fa-check-circle"></i></div>
+                  <div>Easy-to-use interface for job posting creation</div>
+                </div>
+                <div class="timeline-feature">
+                  <div class="timeline-feature-icon"><i class="fas fa-check-circle"></i></div>
+                  <div>Profile synchronization with LinkedIn</div>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-number">1</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <div class="timeline-icon"><i class="fas fa-brain"></i></div>
+              <h3 class="timeline-title">AI Analysis & Processing</h3>
+              <p class="timeline-description">
+                Our sophisticated AI algorithms analyze the submitted information, extracting key details, 
+                skills, experience, and even contextual understanding of roles and requirements.
+              </p>
+              <div class="timeline-features">
+                <div class="timeline-feature">
+                  <div class="timeline-feature-icon"><i class="fas fa-check-circle"></i></div>
+                  <div>Natural Language Processing for context understanding</div>
+                </div>
+                <div class="timeline-feature">
+                  <div class="timeline-feature-icon"><i class="fas fa-check-circle"></i></div>
+                  <div>Skill extraction with 95% accuracy</div>
+                </div>
+                <div class="timeline-feature">
+                  <div class="timeline-feature-icon"><i class="fas fa-check-circle"></i></div>
+                  <div>Industry-specific knowledge base</div>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-number">2</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <div class="timeline-icon"><i class="fas fa-puzzle-piece"></i></div>
+              <h3 class="timeline-title">Smart Matching</h3>
+              <p class="timeline-description">
+                Our platform matches candidates with job opportunities based on skills, experience, 
+                and cultural fit, providing percentage-based match scores for transparency.
+              </p>
+              <div class="timeline-features">
+                <div class="timeline-feature">
+                  <div class="timeline-feature-icon"><i class="fas fa-check-circle"></i></div>
+                  <div>Multi-dimensional matching criteria</div>
+                </div>
+                <div class="timeline-feature">
+                  <div class="timeline-feature-icon"><i class="fas fa-check-circle"></i></div>
+                  <div>Transparent match percentage scoring</div>
+                </div>
+                <div class="timeline-feature">
+                  <div class="timeline-feature-icon"><i class="fas fa-check-circle"></i></div>
+                  <div>Continuous learning from feedback loops</div>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-number">3</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <div class="timeline-icon"><i class="fas fa-comments"></i></div>
+              <h3 class="timeline-title">Connect & Communicate</h3>
+              <p class="timeline-description">
+                When a strong match is found, both parties are notified and can initiate communication 
+                through our secure platform, streamlining the initial recruitment process.
+              </p>
+              <div class="timeline-features">
+                <div class="timeline-feature">
+                  <div class="timeline-feature-icon"><i class="fas fa-check-circle"></i></div>
+                  <div>Secure in-platform messaging</div>
+                </div>
+                <div class="timeline-feature">
+                  <div class="timeline-feature-icon"><i class="fas fa-check-circle"></i></div>
+                  <div>Interview scheduling tools</div>
+                </div>
+                <div class="timeline-feature">
+                  <div class="timeline-feature-icon"><i class="fas fa-check-circle"></i></div>
+                  <div>Video interview integration</div>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-number">4</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <div class="timeline-icon"><i class="fas fa-chart-line"></i></div>
+              <h3 class="timeline-title">Track & Optimize</h3>
+              <p class="timeline-description">
+                Our platform provides detailed analytics and insights to help both job seekers and 
+                employers optimize their approach and improve future matching outcomes.
+              </p>
+              <div class="timeline-features">
+                <div class="timeline-feature">
+                  <div class="timeline-feature-icon"><i class="fas fa-check-circle"></i></div>
+                  <div>Performance dashboards</div>
+                </div>
+                <div class="timeline-feature">
+                  <div class="timeline-feature-icon"><i class="fas fa-check-circle"></i></div>
+                  <div>Skill gap analysis</div>
+                </div>
+                <div class="timeline-feature">
+                  <div class="timeline-feature-icon"><i class="fas fa-check-circle"></i></div>
+                  <div>Recruitment process optimization</div>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-number">5</div>
+          </div>
+        </div>
+    </div>
+    </section>
+
+    <section class="benefits-section">
+      <div class="container">
+        <div class="section-title-wrapper">
+          <span class="section-tag">BENEFITS</span>
+          <h2 class="section-title">Why Choose CVisionary</h2>
+          <p class="section-description">
+            Our platform delivers tangible benefits for both job seekers and employers, 
+            transforming the recruitment experience for everyone involved.
+          </p>
+        </div>
+
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i class="fas fa-bolt"></i>
+            </div>
+            <h3 class="benefit-title">Time Efficiency</h3>
+            <p class="benefit-description">
+              Reduce your time-to-hire by up to 50% with our AI-powered matching system that 
+              quickly identifies suitable candidates and opportunities without endless searching.
+            </p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i class="fas fa-bullseye"></i>
+            </div>
+            <h3 class="benefit-title">Precision Matching</h3>
+            <p class="benefit-description">
+              Our advanced algorithms go beyond keyword matching to understand context, 
+              resulting in higher-quality connections and better long-term fit.
+            </p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i class="fas fa-chart-bar"></i>
+            </div>
+            <h3 class="benefit-title">Data-Driven Insights</h3>
+            <p class="benefit-description">
+              Gain valuable analytics and feedback to continuously improve your 
+              recruitment strategy or job-seeking approach.
+            </p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3 class="benefit-title">Secure & Private</h3>
+            <p class="benefit-description">
+              Your data is protected with enterprise-grade security protocols, 
+              ensuring confidentiality throughout the recruitment process.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-title-wrapper">
+          <span class="section-tag">FAQ</span>
+          <h2 class="section-title">Common Questions</h2>
+          <p class="section-description">
+            Find answers to frequently asked questions about our platform and how it works.
+          </p>
+        </div>
+
+        <div class="faq-list">
+          <div class="faq-item">
+            <div class="faq-question">
+              How does CVisionary's AI technology work?
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                Our AI technology uses a combination of natural language processing, machine learning, 
+                and proprietary algorithms to analyze resumes and job descriptions. It extracts key 
+                information such as skills, experience, and qualifications, then creates multi-dimensional 
+                profiles for matching. The system continuously learns from feedback and outcomes to 
+                improve matching accuracy over time.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              Is my data secure on your platform?
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                Absolutely. We implement enterprise-grade security measures including end-to-end 
+                encryption, secure data storage, and strict access controls. We comply with all relevant 
+                data protection regulations including GDPR and CCPA. Your data is never sold to third 
+                parties and is only used for the purposes you authorize.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              How much does it cost to use CVisionary?
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                We offer tiered pricing plans for both job seekers and employers. Job seekers can access 
+                basic features for free, with premium options available starting at $12.99/month. For 
+                employers, we offer plans based on company size and hiring volume, starting at $99/month 
+                for small businesses. Visit our pricing page for detailed information and enterprise options.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              Can I integrate CVisionary with my existing HR systems?
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                Yes, we offer robust API integrations with popular HRIS and ATS platforms including 
+                Workday, SAP SuccessFactors, Oracle HCM, BambooHR, Greenhouse, and more. Our 
+                development team can also work with you to create custom integrations for your 
+                specific systems if needed.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              How accurate is the matching algorithm?
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+              <div class="faq-answer-content">
+                Our matching algorithm achieves over 85% accuracy in predicting successful job matches, 
+                based on post-hire performance and retention metrics. We continuously refine our algorithms 
+                using machine learning and feedback loops to improve accuracy. For skills extraction 
+                specifically, our system maintains a 95% accuracy rate across all industries.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <div class="cta-content">
+          <h2 class="cta-title">Ready to Transform Your Recruitment?</h2>
+          <p class="cta-description">
+            Join thousands of companies and job seekers who are already benefiting from 
+            our AI-powered recruitment platform.
+          </p>
+          <div class="cta-buttons">
+            <button class="btn btn-light">Get Started Free</button>
+            <button class="btn btn-outline-light">Schedule a Demo</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="footer-logo">
+              <div class="footer-logo-icon">
+                <i class="fas fa-brain"></i>
+              </div>
+              CVisionary
+            </div>
+            <p class="footer-description">
+              Transforming recruitment with AI-powered matching to connect the right talent 
+              with the right opportunities.
+            </p>
+            <div class="social-icons">
+              <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="footer-heading">Product</h3>
+            <div class="footer-links">
+              <a href="#">Features</a>
+              <a href="#">How It Works</a>
+              <a href="#">Pricing</a>
+              <a href="#">Case Studies</a>
+              <a href="#">Testimonials</a>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="footer-heading">Resources</h3>
+            <div class="footer-links">
+              <a href="#">Blog</a>
+              <a href="#">Help Center</a>
+              <a href="#">API Documentation</a>
+              <a href="#">Guides</a>
+              <a href="#">Webinars</a>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="footer-heading">Company</h3>
+            <div class="footer-links">
+              <a href="#">About Us</a>
+              <a href="#">Careers</a>
+              <a href="#">Contact</a>
+              <a href="#">Partners</a>
+              <a href="#">News</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2025 CVisionary. All rights reserved.</p>
+          <div class="footer-bottom-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookies</a>
+            <a href="#">Sitemap</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Add any JavaScript functionality here
+      document.addEventListener("DOMContentLoaded", function () {
+        // Add scroll animation for header
+        window.addEventListener("scroll", function () {
+          const header = document.querySelector("header");
+          if (window.scrollY > 10) {
+            header.style.boxShadow = "var(--shadow)";
+            header.style.background = "rgba(255, 255, 255, 0.98)";
+          } else {
+            header.style.boxShadow = "var(--shadow-sm)";
+            header.style.background = "white";
+          }
+        });
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // Get the buttons from the main page
+        const loginButton = document.querySelector(
+          ".auth-buttons .btn-outline"
+        );
+        const getStartedButton = document.querySelector(
+          ".auth-buttons .btn-primary"
+        );
+
+        if (loginButton) {
+          loginButton.addEventListener("click", function () {
+            // Navigate to login/signup page with login tab active (default)
+            window.location.href = "login-signup.html";
+          });
+        }
+
+        if (getStartedButton) {
+          getStartedButton.addEventListener("click", function () {
+            // Navigate to login/signup page with signup tab active
+            window.location.href = "login-signup.html?tab=signup";
+          });
+        }
+
+        // On the login/signup page, check if we should show signup tab
+        const urlParams = new URLSearchParams(window.location.search);
+        const activeTab = urlParams.get("tab");
+
+        if (activeTab === "signup") {
+          // If URL has ?tab=signup, activate the signup tab
+          const loginTab = document.getElementById("login-tab");
+          const signupTab = document.getElementById("signup-tab");
+
+          if (loginTab && signupTab) {
+            loginTab.classList.remove("active");
+            signupTab.classList.add("active");
+
+            // Also switch the visible form content if needed
+            const loginForm = document.querySelector(".login-form-content");
+            const signupForm = document.querySelector(".signup-form-content");
+
+            if (loginForm && signupForm) {
+              loginForm.style.display = "none";
+              signupForm.style.display = "block";
+            }
+          }
+        }
+      });
+      // Add the following JavaScript code at the end of your existing script tag
+      document.addEventListener("DOMContentLoaded", function () {
+        // FAQ Accordion functionality
+        const faqQuestions = document.querySelectorAll(".faq-question");
+        
+        faqQuestions.forEach(question => {
+          question.addEventListener("click", function() {
+            // Toggle active class on the question
+            this.classList.toggle("active");
+            
+            // Toggle the answer visibility
+            const answer = this.nextElementSibling;
+            answer.classList.toggle("show");
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

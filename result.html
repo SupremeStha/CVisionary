@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Match Dashboard - CVisionary</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      }
+
+      :root {
+        --primary: #a1c9ff;
+        --primary-dark: #4997ff;
+        --primary-light: #818cf8;
+        --secondary: #cca6ff;
+        --success: #10b981;
+        --success-light: rgba(16, 185, 129, 0.1);
+        --gray-50: #f9fafb;
+        --gray-100: #f3f4f6;
+        --gray-200: #e5e7eb;
+        --gray-300: #d1d5db;
+        --gray-400: #9ca3af;
+        --gray-500: #6b7280;
+        --gray-600: #4b5563;
+        --gray-700: #374151;
+        --gray-800: #1f2937;
+        --gray-900: #111827;
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      body {
+        background-color: var(--gray-50);
+        color: var(--gray-900);
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 0 40px;
+      }
+
+      header {
+        background-color: white;
+        box-shadow: var(--shadow-sm);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 0 40px;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+        max-width: 1440px;
+        margin: 0 auto;
+        height: 80px;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+      }
+
+      .logo span {
+        color: var(--gray-900);
+      }
+
+      .logo-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-light)
+        );
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 20px;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 40px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--gray-600);
+        font-weight: 500;
+        transition: all 0.3s ease;
+        font-size: 1.05rem;
+        position: relative;
+        padding: 6px 2px;
+      }
+
+      .nav-links a:hover, .nav-links a.active {
+        color: var(--primary);
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 3px;
+        bottom: -3px;
+        left: 0;
+        background-color: var(--primary);
+        transition: width 0.3s ease;
+        border-radius: 2px;
+      }
+
+      .nav-links a:hover::after, .nav-links a.active::after {
+        width: 100%;
+      }
+
+      .auth-buttons {
+        display: flex;
+        gap: 20px;
+      }
+
+      .btn {
+        padding: 12px 24px;
+        border-radius: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: none;
+        font-size: 1rem;
+      }
+
+      .btn-outline {
+        background-color: transparent;
+        border: 2px solid var(--primary);
+        color: var(--primary);
+      }
+
+      .btn-outline:hover {
+        background-color: var(--primary);
+        color: white;
+      }
+
+      .btn-primary {
+        background-color: var(--primary);
+        color: white;
+        box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
+      }
+
+      .btn-primary:hover {
+        background-color: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+      }
+
+      /* Dashboard specific styles */
+      .dashboard-section {
+        padding-top: 120px;
+        padding-bottom: 100px;
+      }
+
+      .dashboard-header {
+        margin-bottom: 40px;
+      }
+
+      .dashboard-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 15px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .dashboard-subtitle {
+        color: var(--gray-600);
+        font-size: 1.2rem;
+        max-width: 800px;
+      }
+
+      .file-upload-info {
+        background-color: white;
+        border-radius: 16px;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 40px;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--gray-200);
+      }
+
+      .file-icon {
+        width: 50px;
+        height: 50px;
+        background-color: var(--gray-100);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 20px;
+        color: var(--primary);
+        font-size: 1.5rem;
+      }
+
+      .file-details {
+        flex: 1;
+      }
+
+      .file-name {
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+        color: var(--gray-800);
+      }
+
+      .file-size {
+        color: var(--gray-500);
+        font-size: 0.9rem;
+      }
+
+      .file-actions {
+        display: flex;
+        gap: 15px;
+      }
+
+      .file-action-btn {
+        background-color: var(--gray-100);
+        color: var(--gray-600);
+        border: none;
+        border-radius: 10px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .file-action-btn:hover {
+        background-color: var(--primary);
+        color: white;
+      }
+
+      .match-results-container {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      .match-card {
+        background-color: white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--gray-200);
+      }
+
+      .match-header {
+        background-color: var(--gray-100);
+        padding: 25px;
+        border-bottom: 1px solid var(--gray-200);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .match-position {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--gray-800);
+      }
+
+      .match-score {
+        background-color: var(--gray-200);
+        padding: 8px 15px;
+        border-radius: 30px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .match-score-value {
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: var(--gray-700);
+      }
+
+      .match-content {
+        padding: 25px;
+      }
+
+      .match-details {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        margin-bottom: 25px;
+      }
+
+      .match-company, .match-location {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+      }
+
+      .match-icon {
+        width: 40px;
+        height: 40px;
+        background-color: var(--gray-100);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary);
+        font-size: 1.2rem;
+      }
+
+      .match-label {
+        color: var(--gray-500);
+        margin-bottom: 5px;
+        font-size: 0.9rem;
+      }
+
+      .match-value {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--gray-800);
+      }
+
+      .match-skills-section {
+        margin-bottom: 25px;
+      }
+
+      .skills-heading {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 15px;
+        color: var(--gray-700);
+        font-weight: 600;
+      }
+
+      .skills-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .skill-tag {
+        background-color: var(--gray-100);
+        color: var(--primary-dark);
+        padding: 8px 16px;
+        border-radius: 30px;
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+
+      .missing-skill-tag {
+        background-color: rgba(239, 68, 68, 0.1);
+        color: #ef4444;
+      }
+
+      .match-reason {
+        background-color: var(--gray-100);
+        border-radius: 12px;
+        padding: 20px;
+      }
+
+      .reason-heading {
+        font-weight: 600;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--gray-700);
+      }
+
+      .reason-text {
+        color: var(--gray-600);
+        line-height: 1.7;
+      }
+
+      .match-actions {
+        display: flex;
+        gap: 15px;
+        margin-top: 25px;
+      }
+
+      .match-success-indicator {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        background-color: var(--success-light);
+        color: var(--success);
+        padding: 12px 20px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        font-weight: 600;
+      }
+
+      .success-icon {
+        width: 30px;
+        height: 30px;
+        background-color: var(--success);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Responsive styles */
+      @media (max-width: 900px) {
+        .match-details {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 0 20px;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .dashboard-title {
+          font-size: 2rem;
+        }
+
+        .match-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 15px;
+        }
+
+        .match-content {
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="index.html" class="logo">
+          <div class="logo-icon">
+            <i class="fas fa-brain"></i>
+          </div>
+          CVisionary
+        </a>
+        <div class="nav-links">
+          <a href="features.html">Features</a>
+          <a href="howitworks.html">How It Works</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="upload.html">Upload</a>
+          <a href="dashboard.html" class="active">Dashboard</a>
+          <a href="about-us.html">About Us</a>
+        </div>
+        <div class="auth-buttons">
+          <button class="btn btn-outline">My Account</button>
+          <button class="btn btn-primary">View All Jobs</button>
+        </div>
+      </nav>
+    </header>
+
+    <section class="dashboard-section">
+      <div class="container">
+        <div class="dashboard-header">
+          <h1 class="dashboard-title">Your Job Match Results</h1>
+          <p class="dashboard-subtitle">
+            Based on your resume, we've found job matches that align with your skills and experience. Here are your personalized recommendations.
+          </p>
+        </div>
+
+        <div class="file-upload-info">
+          <div class="file-icon">
+            <i class="fas fa-file-pdf"></i>
+          </div>
+          <div class="file-details">
+            <div class="file-name">Yug-Adhikari-FlowCV-Resume-20250324.pdf</div>
+            <div class="file-size">69.4KB</div>
+          </div>
+          <div class="file-actions">
+            <button class="file-action-btn" title="Delete">
+              <i class="fas fa-trash"></i>
+            </button>
+            <button class="file-action-btn" title="Download">
+              <i class="fas fa-download"></i>
+            </button>
+            <button class="file-action-btn" title="Upload New">
+              <i class="fas fa-upload"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="match-success-indicator">
+          <div class="success-icon">
+            <i class="fas fa-check"></i>
+          </div>
+          <span>Top 1 job matches found!</span>
+        </div>
+
+        <div class="match-results-container">
+          <div class="match-card">
+            <div class="match-header">
+              <h2 class="match-position">1. Python Developer</h2>
+              <div class="match-score">
+                <i class="fas fa-chart-pie"></i>
+                <span class="match-score-value">80/100</span>
+              </div>
+            </div>
+            <div class="match-content">
+              <div class="match-details">
+                <div class="match-company">
+                  <div class="match-icon">
+                    <i class="fas fa-building"></i>
+                  </div>
+                  <div>
+                    <div class="match-label">Company</div>
+                    <div class="match-value">Softbenz Infosys</div>
+                  </div>
+                </div>
+                <div class="match-location">
+                  <div class="match-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                  </div>
+                  <div>
+                    <div class="match-label">Location</div>
+                    <div class="match-value">Kathmandu, Bagmati, Nepal</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="match-skills-section">
+                <h3 class="skills-heading">
+                  <i class="fas fa-check-circle"></i> Matched Skills
+                </h3>
+                <div class="skills-list">
+                  <div class="skill-tag">Python Programming</div>
+                  <div class="skill-tag">Django</div>
+                  <div class="skill-tag">Data Visualization</div>
+                  <div class="skill-tag">Matplotlib</div>
+                  <div class="skill-tag">Seaborn</div>
+                  <div class="skill-tag">File handling</div>
+                  <div class="skill-tag">OOPs</div>
+                  <div class="skill-tag">DSA</div>
+                  <div class="skill-tag">HTML</div>
+                  <div class="skill-tag">CSS</div>
+                </div>
+              </div>
+
+              <div class="match-skills-section">
+                <h3 class="skills-heading">
+                  <i class="fas fa-exclamation-circle"></i> Missing Skills
+                </h3>
+                <div class="skills-list">
+                  <div class="skill-tag missing-skill-tag">Django REST Framework</div>
+                  <div class="skill-tag missing-skill-tag">PostgreSQL</div>
+                  <div class="skill-tag missing-skill-tag">MySQL</div>
+                  <div class="skill-tag missing-skill-tag">Git</div>
+                  <div class="skill-tag missing-skill-tag">DevOps</div>
+                  <div class="skill-tag missing-skill-tag">AWS</div>
+                  <div class="skill-tag missing-skill-tag">JavaScript</div>
+                  <div class="skill-tag missing-skill-tag">Form Handling</div>
+                  <div class="skill-tag missing-skill-tag">Authentication & Authorization</div>
+                  <div class="skill-tag missing-skill-tag">Microsoft Office</div>
+                </div>
+              </div>
+
+              <div class="match-reason">
+                <h3 class="reason-heading">
+                  <i class="fas fa-lightbulb"></i> Match Reasoning
+                </h3>
+                <p class="reason-text">
+                  The candidate has a strong background in Python programming and Django, which aligns with the job requirements. Additionally, they have experience with data visualization tools like Matplotlib and Seaborn. However, there is a gap in their experience with Django REST Framework and PostgreSQL, as well as DevOps and AWS. The candidate's soft skills, including communication, interpersonal, and public speaking, are also mentioned but not directly linked to the job requirements.
+                </p>
+              </div>
+
+              <div class="match-actions">
+                <button class="btn btn-primary">Apply Now</button>
+                <button class="btn btn-outline">Save Job</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Add scroll animation for header
+        window.addEventListener("scroll", function () {
+          const header = document.querySelector("header");
+          if (window.scrollY > 10) {
+            header.style.boxShadow = "var(--shadow)";
+            header.style.background = "rgba(255, 255, 255, 0.98)";
+          } else {
+            header.style.boxShadow = "var(--shadow-sm)";
+            header.style.background = "white";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
